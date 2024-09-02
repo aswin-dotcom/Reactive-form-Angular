@@ -1,0 +1,54 @@
+<h1>Reactive Forms</h1>
+<form [formGroup]="constactForm">
+    <div>
+        <label for="name">Enter your name</label>
+        <input type="text" formControlName="FirstName" id="name" />
+        <span *ngIf="!firstName?.valid&&(firstName?.dirty||firstName?.touched)">
+            <span [ngStyle]="{'color':'red'}" *ngIf="firstName?.errors?.['required']">
+                name is required
+            </span>
+            <span [ngStyle]="{'color':'red'}" *ngIf="firstName?.errors?.['maxlength']">
+                maximum 5 characters allowed
+            </span>
+
+        </span>
+    </div>
+    <div>
+       <label for="lastname">Last Name</label>
+       <input type="text" id="lastname" formControlName="LastName" />
+       <span *ngIf="!lastname?.valid && (lastname?.dirty|| lastname?.touched)">
+        <span [ngStyle]="{'color':'red'}" *ngIf="lastname?.errors?.['required']">lastname is required</span>
+        <span  [ngStyle]="{'color':'red'}" *ngIf="lastname?.errors?.['minlength']">minlength should be 5</span>
+       </span>
+
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input type="text" id="email" formControlName="Email" />
+        <span  *ngIf="!email?.valid && (email?.dirty && email?.touched)">
+            <span [ngStyle]="{'color':'red'}" *ngIf="email?.errors?.['required']">Email is required</span>
+
+        </span>
+
+    </div>
+    <div>
+        <label for="gender">Gender</label>
+        <input type="radio" id="gender" formControlName="gender" value="male"  />Male
+        <input type="radio" id="gender" formControlName="gender" value="female"  />female
+        <span *ngIf="!gender?.valid && (gender?.dirty || gender?.touched)">
+          <p [ngStyle]="{'color':'red'}"]>gender required</p>
+
+        </span>
+    </div>
+    <div formGroupName="address">
+        <label for="address">Address</label>
+        <input type="text" id="address" formControlName="State"/>
+
+        <span *ngIf="!state?.valid && (state?.touched || state?.dirty)">
+            <p [ngStyle]="{'color':'red'}">Address required</p>
+        </span>
+
+    </div>
+    <button [disabled]="!constactForm.valid">submit</button>
+
+</form>
